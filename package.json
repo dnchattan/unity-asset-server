@@ -7,15 +7,34 @@
   "author": "Daniel Chattan <dnchattan@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "init-submodules": "git submodule update --init --recursive"
+    "init-submodules": "git submodule update --init --recursive",
+    "build-asset-studio": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\VsDevCmd.bat && msbuild /target:Texture2DDecoderNative /property:Configuration=Release"
+  },
+  "peerDependencies": {
+    "ffi-napi": "^4.0.3",
+    "win32-api": "^9.6.0"
   },
   "dependencies": {
+    "@perf-tools/performance": "^1.1.1",
     "cacache": "^15.0.6",
+    "chalk": "^4.1.1",
+    "fast-glob": "^3.2.5",
+    "is-promise": "^4.0.0",
     "jimp": "^0.16.1",
-    "tslib": "^2.2.0"
+    "lz4": "^0.6.5",
+    "lzma": "^2.3.2",
+    "pretty-ms": "^7.0.1",
+    "smart-buffer": "^4.1.0",
+    "strip-ansi": "^7.0.0",
+    "tracer": "^1.1.4",
+    "ts-brand": "^0.0.2",
+    "tslib": "^2.2.0",
+    "typescript": "^4.3.2"
   },
   "devDependencies": {
     "@types/cacache": "^15.0.0",
+    "@types/ffi-napi": "^4.0.3",
+    "@types/is-promise": "^2.2.0",
     "@types/jest": "^26.0.20",
     "@typescript-eslint/eslint-plugin": "^4.14.0",
     "@typescript-eslint/parser": "^4.14.0",
@@ -25,12 +44,14 @@
     "eslint-config-airbnb-typescript": "^12.0.0",
     "eslint-config-prettier": "^7.2.0",
     "eslint-plugin-import": "^2.22.1",
+    "ffi-napi": "^4.0.3",
     "jest": "^26.6.3",
     "just-scripts": "^1.4.0",
     "patch-package": "^6.2.2",
     "postinstall-postinstall": "^2.1.0",
     "prettier": "^2.2.1",
     "ts-jest": "^26.5.5",
-    "ts-node": "^9.1.1"
+    "ts-node": "^9.1.1",
+    "win32-api": "^9.6.0"
   }
 }
