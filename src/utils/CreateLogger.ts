@@ -1,5 +1,5 @@
 import { colorConsole } from 'tracer';
-import stripAnsi from 'strip-ansi';
+import { stripAnsi } from './StripAnsi';
 import fs from 'fs';
 import path from 'path';
 

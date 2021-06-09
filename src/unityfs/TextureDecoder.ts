@@ -1,26 +1,25 @@
 import { Library } from 'ffi-napi';
-import { DTypes as W } from 'win32-api';
 import { Texture2D, TextureFormat } from './Objects/Texture2D';
 import path from 'path';
 import { log } from './Logger';
 
 process.env.PATH = [process.env.PATH, path.resolve(__dirname, '../../bin')].join(';');
 const TextureDecoder = Library('Texture2DDecoderNative', {
-  DecodeDXT1: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeDXT5: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeBC4: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeBC5: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeBC6: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeBC7: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeETC1: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeATCRGB4: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeATCRGBA8: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeEACR: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeEACRSigned: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeEACRG: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeETC2: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeETC2A1: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
-  DecodeETC2A8: [W.BOOLEAN, [W.PVOID, W.INT, W.INT, W.PVOID]],
+  DecodeDXT1: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeDXT5: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeBC4: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeBC5: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeBC6: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeBC7: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeETC1: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeATCRGB4: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeATCRGBA8: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeEACR: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeEACRSigned: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeEACRG: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeETC2: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeETC2A1: ['bool', ['byte*', 'int', 'int', 'byte*']],
+  DecodeETC2A8: ['bool', ['byte*', 'int', 'int', 'byte*']],
 });
 
 export async function getTextureBuffer(texture: Texture2D): Promise<Buffer> {
