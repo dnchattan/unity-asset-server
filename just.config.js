@@ -22,3 +22,5 @@ task('test', jestTask({ passWithNoTests: true }));
 task('lint', eslintTask());
 task('ci', series('ts', parallel('test', 'lint')));
 task('build:native', () => buildDll())
+
+task('build', () => parallel('ts', 'build:native'))

@@ -1,6 +1,6 @@
 {
   "name": "unity-asset-server",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Package that can serve unity assets on-demand from a resource directory",
   "main": "lib/index.js",
   "repository": "https://github.com/dnchattan/unity-asset-server.git",
@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "init-submodules": "git submodule update --init --recursive",
-    "build-asset-studio": "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\Tools\\VsDevCmd.bat && msbuild /target:Texture2DDecoderNative /property:Configuration=Release"
+    "build": "just build"
   },
   "peerDependencies": {
     "ffi-napi": "^4.0.3",
