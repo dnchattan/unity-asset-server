@@ -2,6 +2,7 @@ import path from 'path';
 import { SmartBuffer } from 'smart-buffer';
 import { EndianReader } from './EndianReader';
 import { assert } from '../utils/Assert';
+
 const lz4: {
   decodeBlock(input: Buffer, output: Buffer, startIdx?: number, endIdx?: number): number;
 } = require('lz4');
@@ -79,7 +80,7 @@ export class BundleFile {
     for (const block of this.blocksInfo.blocks) {
       const blockBuffer = this.reader.readBuffer(block.size.compressed);
       switch (
-        block.flags & 0x3f //kStorageBlockCompressionTypeMask
+        block.flags & 0x3f // kStorageBlockCompressionTypeMask
       ) {
         case 1:
           // const headerBuf = blockBuffer.slice(0, 5);
@@ -108,7 +109,11 @@ export class BundleFile {
   }
 
   private alignStream(alignment: number): void {
-    this.reader.readOffset += this.reader.readOffset % alignment;
+    const pos = this.reader.readOffset;
+    const mod = pos % alignment;
+    if (mod !== 0) {
+      this.reader.readOffset += alignment - mod;
+    }
   }
 
   private readBlocksInfo(): BlocksInfo {
@@ -144,19 +149,19 @@ export class BundleFile {
       this.alignStream(16);
     }
     if (this.header.flags & 0x80) {
-      //kArchiveBlocksInfoAtTheEnd
+      // kArchiveBlocksInfoAtTheEnd
       blocksInfoCompressedStream = this.reader.internalBuffer.slice(
         this.reader.length - this.header.blocksInfoSize.compressed,
         this.reader.length
       );
     } else {
-      //0x40 kArchiveBlocksAndDirectoryInfoCombined
+      // 0x40 kArchiveBlocksAndDirectoryInfoCombined
       blocksInfoCompressedStream = this.reader.readBuffer(this.header.blocksInfoSize.compressed);
     }
-    //kArchiveCompressionTypeMask
+    // kArchiveCompressionTypeMask
     switch (this.header.flags & 0x3f) {
       default: {
-        //None
+        // None
         blocksInfoUncompressedStream = blocksInfoCompressedStream;
         break;
       }

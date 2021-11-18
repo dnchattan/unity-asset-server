@@ -22,9 +22,9 @@ export class EndianReader extends SmartBuffer {
   }
 
   alignStream(alignment: number = 4): void {
-    var pos = this.readOffset;
-    var mod = pos % alignment;
-    if (mod != 0) {
+    const pos = this.readOffset;
+    const mod = pos % alignment;
+    if (mod !== 0) {
       this.readOffset += alignment - mod;
     }
   }
